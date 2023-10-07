@@ -59,6 +59,15 @@ func Parse(input string) string {
 		}
 		prevChar = string(char)
 	}
+
+	// remove slashe if followed by [
+	for strings.Contains(outupt, "\\[") {
+		outupt = strings.Replace(outupt, "\\[", "[", -1)
+	}
+	for strings.Contains(outupt, "\\]") {
+		outupt = strings.Replace(outupt, "\\]", "]", -1)
+	}
+
 	return outupt
 }
 
@@ -94,6 +103,9 @@ func preParse(input string) string {
 	// if ~~ is found replace with [strike] and [reset]
 	strikeRegex := regexp.MustCompile(`~~(.*?)~~`)
 	input = strikeRegex.ReplaceAllString(input, "[strike]$1[reset]")
+	// if [] is found replace with [reset]
+	resetRegex := regexp.MustCompile(`\[\]`)
+	input = resetRegex.ReplaceAllString(input, "[reset]")
 
 	return input
 }
