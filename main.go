@@ -76,7 +76,7 @@ func Println(input string) {
 }
 
 func Printf(format string, input string) {
-	fmt.Printf(format, Parse(input))
+	fmt.Printf(Parse(format), Parse(input))
 }
 
 func Print(input string) {
@@ -84,7 +84,7 @@ func Print(input string) {
 }
 
 func Sprintf(format string, input string) string {
-	return fmt.Sprintf(format, Parse(input))
+	return fmt.Sprintf(Parse(format), Parse(input))
 }
 
 func preParse(input string) string {
